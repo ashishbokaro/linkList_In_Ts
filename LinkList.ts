@@ -17,11 +17,8 @@ class LinkedList<T> {
 
   public addFirst(data: T): void {
     const newNode = new ListNode(data);
-    // console.log(newNode)
     newNode.next = this.head;
-    // console.log(newNode)
     this.head = newNode;
-    // console.log(this.head)
   }
 
   public addLast(data: T): void {
@@ -71,6 +68,34 @@ class LinkedList<T> {
       current = current.next;
     }
   }
+
+  public deleteFirst(): void {
+    if (this.head === null) {
+      console.log("List is empty");
+      return;
+    }
+    this.head = this.head.next;
+  }
+
+  public deleteLast(): void {
+    if (this.head === null) {
+      console.log("List is empty");
+      return;
+    }
+
+    if (this.head.next === null) {
+      this.head = null;
+      return;
+    }
+
+    let secondLastNode = this.head;
+    let lastNode = this.head.next;
+    while (lastNode.next !== null) {
+      secondLastNode = secondLastNode.next;
+      lastNode = lastNode.next;
+    }
+    secondLastNode.next = null;
+  }
 }
 
 // Example usage:
@@ -78,5 +103,10 @@ const myList = new LinkedList<number>();
 myList.addLast(1);
 myList.addLast(2);
 myList.addFirst(0);
-myList.addElement(1.5, 2);
+myList.addElement(1.5, 3);
+myList.print();
+
+myList.deleteFirst();
+myList.deleteLast();
+
 myList.print();
